@@ -1,0 +1,49 @@
+﻿{% extends 'base.html' %}
+
+ {% block title %} Performance {% endblock %}
+
+ {% block main %}
+ <form method='post' id='send'>
+ {% csrf_token %}
+
+<h4>申請内容 </h4>
+
+<table class="state">
+  <tbody>
+    <tr>
+      <th>組織名</th>
+      <td>{{form_customer.organization_name}} </td>
+    </tr>
+    <tr>
+      <th>氏名</th>
+      <td>{{form_customer.name}} </td>
+    </tr>
+    <tr>
+      <th>電話番号</th>
+      <td>{{form_customer.tell_number}} </td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td>{{form_customer.email}} </td>
+    </tr>
+    <tr>
+      <th>入館予定日時</th>
+      <td>{{form_request.scheduled_entry_datetime}} </td>
+    </tr>
+    <tr>
+      <th>退館予定日時</th>
+      <td>{{form_request.scheduled_exit_datetime}}</td>
+    </tr>
+  </tbody>
+</table >
+<br>
+{% ifequal form_message "入館" %}
+<button class="btn btn-primary" type = "submit/" value = 'enter' onclick='return confirm("入館します");' form = 'send'>入館 </button>
+<button class="btn btn-secondary" disabled="disabled">退館</button>
+{% else %}
+<button class="btn btn-secondary" type = "subumit/" disabled="disabled">入館</button>
+<button class="btn btn-danger" value = 'enter' onclick='return confirm("退館します");'form = 'send'>退館 </button>
+{%endifequal%}
+</form>
+ {% endblock %}
+
